@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.7.5 on darwin)" generated="20191110 20:41:07.829" rpa="false">
+<suite id="s1" name="TesteCiandtWebUser" source="/Users/pedroh/Downloads/Carol/Testes/WEB/Testes/TesteCiandtWebUser.robot">
+<kw name="Open the page" library="ResourceUser" type="setup">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20191110 20:41:08.070" level="INFO">Opening browser 'chrome' to base url 'http://automationpractice.com'.</msg>
+<status status="PASS" starttime="20191110 20:41:08.070" endtime="20191110 20:41:19.166"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>class=login</arg>
+</arguments>
+<msg timestamp="20191110 20:41:19.168" level="INFO">Clicking element 'class=login'.</msg>
+<status status="PASS" starttime="20191110 20:41:19.167" endtime="20191110 20:41:20.161"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>css=#center_column &gt; h1</arg>
+</arguments>
+<status status="PASS" starttime="20191110 20:41:20.161" endtime="20191110 20:41:20.860"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Login - My Store</arg>
+</arguments>
+<msg timestamp="20191110 20:41:20.868" level="INFO">Page title is 'Login - My Store'.</msg>
+<status status="PASS" starttime="20191110 20:41:20.860" endtime="20191110 20:41:20.869"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id=email_create</arg>
+<arg>${EMAIL}</arg>
+</arguments>
+<msg timestamp="20191110 20:41:20.870" level="INFO">Typing text 'a@c.b' into text field 'id=email_create'.</msg>
+<status status="PASS" starttime="20191110 20:41:20.869" endtime="20191110 20:41:21.115"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>id=SubmitCreate</arg>
+</arguments>
+<msg timestamp="20191110 20:41:21.116" level="INFO">Clicking element 'id=SubmitCreate'.</msg>
+<status status="PASS" starttime="20191110 20:41:21.115" endtime="20191110 20:41:21.228"></status>
+</kw>
+<status status="PASS" starttime="20191110 20:41:08.069" endtime="20191110 20:41:21.228"></status>
+</kw>
+<test id="s1-t1" name="Scenario 1: Registering new users with all required elements completed">
+<kw name="Given I'm on the login page" library="ResourceUser">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Login - My Store</arg>
+</arguments>
+<msg timestamp="20191110 20:41:21.240" level="INFO">Page title is 'Login - My Store'.</msg>
+<status status="PASS" starttime="20191110 20:41:21.230" endtime="20191110 20:41:21.241"></status>
+</kw>
+<status status="PASS" starttime="20191110 20:41:21.229" endtime="20191110 20:41:21.241"></status>
+</kw>
+<kw name="When I type all required elements" library="ResourceUser">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>id=customer_firstname</arg>
+</arguments>
+<status status="PASS" starttime="20191110 20:41:21.242" endtime="20191110 20:41:22.648"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id=customer_firstname</arg>
+<arg>Ana</arg>
+</arguments>
+<msg timestamp="20191110 20:41:22.649" level="INFO">Typing text 'Ana' into text field 'id=customer_firstname'.</msg>
+<status status="PASS" starttime="20191110 20:41:22.649" endtime="20191110 20:41:22.791"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>id=customer_lastname</arg>
+</arguments>
+<status status="PASS" starttime="20191110 20:41:22.792" endtime="20191110 20:41:22.822"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id=customer_lastname</arg>
+<arg>Paula</arg>
+</arguments>
+<msg timestamp="20191110 20:41:22.823" level="INFO">Typing text 'Paula' into text field 'id=customer_lastname'.</msg>
+<status status="PASS" starttime="20191110 20:41:22.822" endtime="20191110 20:41:22.959"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>id=passwd</arg>
+</arguments>
+<status status="PASS" starttime="20191110 20:41:22.959" endtime="20191110 20:41:22.987"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id=passwd</arg>
+<arg>12345</arg>
+</arguments>
+<msg timestamp="20191110 20:41:22.988" level="INFO">Typing text '12345' into text field 'id=passwd'.</msg>
+<status status="PASS" starttime="20191110 20:41:22.988" endtime="20191110 20:41:23.110"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>id=address1</arg>
+</arguments>
+<status status="PASS" starttime="20191110 20:41:23.111" endtime="20191110 20:41:23.231"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id=address1</arg>
+<arg>rua zero</arg>
+</arguments>
+<msg timestamp="20191110 20:41:23.232" level="INFO">Typing text 'rua zero' into text field 'id=address1'.</msg>
+<status status="PASS" starttime="20191110 20:41:23.231" endtime="20191110 20:41:23.402"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>id=city</arg>
+</arguments>
+<status status="PASS" starttime="20191110 20:41:23.403" endtime="20191110 20:41:23.436"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id=city</arg>
+<arg>bh</arg>
+</arguments>
+<msg timestamp="20191110 20:41:23.437" level="INFO">Typing text 'bh' into text field 'id=city'.</msg>
+<status status="PASS" starttime="20191110 20:41:23.436" endtime="20191110 20:41:23.533"></status>
+</kw>
+<kw name="Select From List By Index" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``indexes``.</doc>
+<arguments>
+<arg>id=id_state</arg>
+<arg>1</arg>
+</arguments>
+<msg timestamp="20191110 20:41:23.534" level="INFO">Selecting options from selection list 'id=id_state' by index 1.</msg>
+<status status="PASS" starttime="20191110 20:41:23.534" endtime="20191110 20:41:23.666"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>id=postcode</arg>
+</arguments>
+<status status="PASS" starttime="20191110 20:41:23.666" endtime="20191110 20:41:23.700"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id=postcode</arg>
+<arg>23456</arg>
+</arguments>
+<msg timestamp="20191110 20:41:23.700" level="INFO">Typing text '23456' into text field 'id=postcode'.</msg>
+<status status="PASS" starttime="20191110 20:41:23.700" endtime="20191110 20:41:23.842"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>id=phone_mobile</arg>
+</arguments>
+<status status="PASS" starttime="20191110 20:41:23.842" endtime="20191110 20:41:23.871"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id=phone_mobile</arg>
+<arg>9999999</arg>
+</arguments>
+<msg timestamp="20191110 20:41:23.872" level="INFO">Typing text '9999999' into text field 'id=phone_mobile'.</msg>
+<status status="PASS" starttime="20191110 20:41:23.871" endtime="20191110 20:41:24.017"></status>
+</kw>
+<status status="PASS" starttime="20191110 20:41:21.241" endtime="20191110 20:41:24.017"></status>
+</kw>
+<kw name="And click on register I'm redirected to My Account page" library="ResourceUser">
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="submitAccount"]/span</arg>
+</arguments>
+<msg timestamp="20191110 20:41:24.019" level="INFO">Clicking element 'xpath=//*[@id="submitAccount"]/span'.</msg>
+<status status="PASS" starttime="20191110 20:41:24.018" endtime="20191110 20:41:25.400"></status>
+</kw>
+<status status="PASS" starttime="20191110 20:41:24.018" endtime="20191110 20:41:25.400"></status>
+</kw>
+<kw name="Then the name of the new user appears in the upper right account of the page" library="ResourceUser">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>My account - My Store</arg>
+</arguments>
+<msg timestamp="20191110 20:41:25.410" level="INFO">Page title is 'My account - My Store'.</msg>
+<status status="PASS" starttime="20191110 20:41:25.401" endtime="20191110 20:41:25.410"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>xpath=//*[@id="header"]/div[2]/div/div/nav/div[2]/a</arg>
+</arguments>
+<status status="PASS" starttime="20191110 20:41:25.410" endtime="20191110 20:41:25.450"></status>
+</kw>
+<status status="PASS" starttime="20191110 20:41:25.400" endtime="20191110 20:41:25.450"></status>
+</kw>
+<status status="PASS" starttime="20191110 20:41:21.228" endtime="20191110 20:41:25.451" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20191110 20:41:07.838" endtime="20191110 20:41:25.452"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="TesteCiandtWebUser">TesteCiandtWebUser</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
