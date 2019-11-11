@@ -3,9 +3,9 @@
 Neste repo você vai encontrar 2 pastas uma cahamda API e outra chamada WEB.
 Dentro de cada pasta existe 3 subpastas onde cada uma representa um fluxo de teste feito. 
 Cada fluxo de teste possui:
-•    1 arquivo com roteiro de teste escrito em BDD.
-•    1 arquivo com a implementação dos testes chamado Recource.
-•    1 pastas chamada resulta com os por do teste.
+* 1 arquivo com roteiro de teste escrito em BDD.
+* 1 arquivo com a implementação dos testes chamado Recource.
+* 1 pastas chamada resulta com os por do teste.
 
 Nas pastas a seguir segue 3 fluxos de de teste da API e 2 Fluxos de testes da página web
 
