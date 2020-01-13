@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.7.5 on darwin)" generated="20200112 22:01:35.049" rpa="false">
+<suite id="s1" name="WebPesquisa" source="/Users/pedroh/Documents/TesteWebAPI-master/WEB/Testes/TestePesquisa/WebPesquisa.robot">
+<test id="s1-t1" name="Scenario 1: Search for a product on your site">
+<kw name="Open the page" library="ResourcePesquisa" type="setup">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200112 22:01:35.448" level="INFO">Opening browser 'chrome' to base url 'http://automationpractice.com'.</msg>
+<status status="PASS" starttime="20200112 22:01:35.447" endtime="20200112 22:01:45.543"></status>
+</kw>
+<status status="PASS" starttime="20200112 22:01:35.446" endtime="20200112 22:01:45.543"></status>
+</kw>
+<kw name="Given that I am on the Home page of the site" library="ResourcePesquisa">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>My Store</arg>
+</arguments>
+<msg timestamp="20200112 22:01:45.554" level="INFO">Page title is 'My Store'.</msg>
+<status status="PASS" starttime="20200112 22:01:45.545" endtime="20200112 22:01:45.554"></status>
+</kw>
+<status status="PASS" starttime="20200112 22:01:45.544" endtime="20200112 22:01:45.554"></status>
+</kw>
+<kw name="When I look for the product &quot;Dress&quot;" library="ResourcePesquisa">
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id=search_query_top</arg>
+<arg>${PRODUCT}</arg>
+</arguments>
+<msg timestamp="20200112 22:01:45.557" level="INFO">Typing text 'Dress' into text field 'id=search_query_top'.</msg>
+<status status="PASS" starttime="20200112 22:01:45.556" endtime="20200112 22:01:45.942"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>name=submit_search</arg>
+</arguments>
+<msg timestamp="20200112 22:01:45.943" level="INFO">Clicking element 'name=submit_search'.</msg>
+<status status="PASS" starttime="20200112 22:01:45.942" endtime="20200112 22:01:47.538"></status>
+</kw>
+<status status="PASS" starttime="20200112 22:01:45.555" endtime="20200112 22:01:47.538"></status>
+</kw>
+<kw name="Then the &quot;Dress&quot; product is listed on the result page" library="ResourcePesquisa">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>css=.navigation_page</arg>
+</arguments>
+<status status="PASS" starttime="20200112 22:01:47.540" endtime="20200112 22:01:47.604"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Search - My Store</arg>
+</arguments>
+<msg timestamp="20200112 22:01:47.612" level="INFO">Page title is 'Search - My Store'.</msg>
+<status status="PASS" starttime="20200112 22:01:47.604" endtime="20200112 22:01:47.612"></status>
+</kw>
+<kw name="Page Should Contain Link" library="SeleniumLibrary">
+<doc>Verifies link identified by ``locator`` is found from current page.</doc>
+<arguments>
+<arg>xpath=//*[@id="center_column"]//a[@class="product-name"][contains(text(),"${PRODUCT_NAME}")]</arg>
+</arguments>
+<msg timestamp="20200112 22:01:47.704" level="INFO">Current page contains link 'xpath=//*[@id="center_column"]//a[@class="product-name"][contains(text(),"Dress")]'.</msg>
+<status status="PASS" starttime="20200112 22:01:47.613" endtime="20200112 22:01:47.704"></status>
+</kw>
+<status status="PASS" starttime="20200112 22:01:47.539" endtime="20200112 22:01:47.704"></status>
+</kw>
+<kw name="Close the page" library="ResourcePesquisa" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200112 22:01:47.706" endtime="20200112 22:01:47.852"></status>
+</kw>
+<status status="PASS" starttime="20200112 22:01:47.705" endtime="20200112 22:01:47.853"></status>
+</kw>
+<status status="PASS" starttime="20200112 22:01:35.445" endtime="20200112 22:01:47.853" critical="yes"></status>
+</test>
+<test id="s1-t2" name="Scenario 2: Search for a product that does not exist on the site">
+<kw name="Open the page" library="ResourcePesquisa" type="setup">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200112 22:01:47.860" level="INFO">Opening browser 'chrome' to base url 'http://automationpractice.com'.</msg>
+<status status="PASS" starttime="20200112 22:01:47.859" endtime="20200112 22:01:56.989"></status>
+</kw>
+<status status="PASS" starttime="20200112 22:01:47.857" endtime="20200112 22:01:56.989"></status>
+</kw>
+<kw name="Given that I am on the Home page of the site" library="ResourcePesquisa">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>My Store</arg>
+</arguments>
+<msg timestamp="20200112 22:01:57.006" level="INFO">Page title is 'My Store'.</msg>
+<status status="PASS" starttime="20200112 22:01:56.992" endtime="20200112 22:01:57.006"></status>
+</kw>
+<status status="PASS" starttime="20200112 22:01:56.990" endtime="20200112 22:01:57.007"></status>
+</kw>
+<kw name="When I look for the product &quot;Pencil&quot;" library="ResourcePesquisa">
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id=search_query_top</arg>
+<arg>${PRODUCT}</arg>
+</arguments>
+<msg timestamp="20200112 22:01:57.010" level="INFO">Typing text 'Pencil' into text field 'id=search_query_top'.</msg>
+<status status="PASS" starttime="20200112 22:01:57.008" endtime="20200112 22:01:57.351"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>name=submit_search</arg>
+</arguments>
+<msg timestamp="20200112 22:01:57.352" level="INFO">Clicking element 'name=submit_search'.</msg>
+<status status="PASS" starttime="20200112 22:01:57.351" endtime="20200112 22:02:04.552"></status>
+</kw>
+<status status="PASS" starttime="20200112 22:01:57.007" endtime="20200112 22:02:04.552"></status>
+</kw>
+<kw name="Then the page should display the message &quot;No results were found for your search &quot;Pencil&quot;&quot;" library="ResourcePesquisa">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>xpath=//*[@id="center_column"]/p[@class="alert alert-warning"]</arg>
+</arguments>
+<status status="PASS" starttime="20200112 22:02:04.554" endtime="20200112 22:02:04.608"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Search - My Store</arg>
+</arguments>
+<msg timestamp="20200112 22:02:04.619" level="INFO">Page title is 'Search - My Store'.</msg>
+<status status="PASS" starttime="20200112 22:02:04.609" endtime="20200112 22:02:04.619"></status>
+</kw>
+<kw name="Element Text Should Be" library="SeleniumLibrary">
+<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
+<arguments>
+<arg>//*[@id="center_column"]/p[@class="alert alert-warning"]</arg>
+<arg>${MENSSAGE}</arg>
+</arguments>
+<msg timestamp="20200112 22:02:04.621" level="INFO">Verifying element '//*[@id="center_column"]/p[@class="alert alert-warning"]' contains exact text 'No results were found for your search "Pencil"'.</msg>
+<status status="PASS" starttime="20200112 22:02:04.620" endtime="20200112 22:02:04.657"></status>
+</kw>
+<status status="PASS" starttime="20200112 22:02:04.553" endtime="20200112 22:02:04.658"></status>
+</kw>
+<kw name="Close the page" library="ResourcePesquisa" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200112 22:02:04.659" endtime="20200112 22:02:04.827"></status>
+</kw>
+<status status="PASS" starttime="20200112 22:02:04.658" endtime="20200112 22:02:04.828"></status>
+</kw>
+<status status="PASS" starttime="20200112 22:01:47.855" endtime="20200112 22:02:04.828" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20200112 22:01:35.054" endtime="20200112 22:02:04.830"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0">Critical Tests</stat>
+<stat pass="2" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="2" fail="0" id="s1" name="WebPesquisa">WebPesquisa</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

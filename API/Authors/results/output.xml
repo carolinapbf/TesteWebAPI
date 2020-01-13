@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.7.5 on darwin)" generated="20200112 21:31:41.113" rpa="false">
+<suite id="s1" name="APIAuthors" source="/Users/pedroh/Documents/TesteWebAPI-master/API/Authors/APIAuthors.robot">
+<kw name="Acess API Test" library="ResourceAuthors" type="setup">
+<kw name="Create Session" library="ExtendedRequestsLibrary">
+<doc>Create and return a HTTP session object to a server.</doc>
+<arguments>
+<arg>apiTeste</arg>
+<arg>${URL_API}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:41.444" level="INFO">Creating Session using : alias=apiTeste, url=https://fakerestapi.azurewebsites.net/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200112 21:31:41.444" endtime="20200112 21:31:41.445"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:41.443" endtime="20200112 21:31:41.445"></status>
+</kw>
+<test id="s1-t1" name="Scenario 1 : Scenario 1: Request all authors that have the same IdBook (GET (ID))">
+<kw name="Given I do a requirement to return books whose author has IDBook &quot;10&quot;" library="ResourceAuthors">
+<kw name="Get Request" library="ExtendedRequestsLibrary">
+<doc>Send a GET request on the session object found in the cache using the given ``label``.</doc>
+<arguments>
+<arg>apiTeste</arg>
+<arg>authors/books/${ENDPOINT_IDBook}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200112 21:31:42.395" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200112 21:31:41.448" endtime="20200112 21:31:42.395"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.text}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:42.396" level="INFO">[{"ID":37,"IDBook":10,"FirstName":"First Name 37","LastName":"Last Name 37"},{"ID":38,"IDBook":10,"FirstName":"First Name 38","LastName":"Last Name 38"},{"ID":39,"IDBook":10,"FirstName":"First Name 39","LastName":"Last Name 39"},{"ID":40,"IDBook":10,"FirstName":"First Name 40","LastName":"Last Name 40"}]</msg>
+<status status="PASS" starttime="20200112 21:31:42.395" endtime="20200112 21:31:42.396"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:42.396" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200112 21:31:42.396" endtime="20200112 21:31:42.397"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:41.447" endtime="20200112 21:31:42.397"></status>
+</kw>
+<kw name="When the status code is checked" library="ResourceAuthors">
+<arguments>
+<arg>200</arg>
+</arguments>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${RESPONSE.status_code}</arg>
+<arg>${STATUSCODE_REQUEST}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:42.399" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200112 21:31:42.398" endtime="20200112 21:31:42.399"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.397" endtime="20200112 21:31:42.399"></status>
+</kw>
+<kw name="And check if the reason is" library="ResourceAuthors">
+<arguments>
+<arg>OK</arg>
+</arguments>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${RESPONSE.reason}</arg>
+<arg>${REASON_SOLICITADO}</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:42.401" endtime="20200112 21:31:42.402"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.400" endtime="20200112 21:31:42.402"></status>
+</kw>
+<kw name="Then check if a request returned a list with the indicateds books" library="ResourceAuthors">
+<kw name="Get Length" library="BuiltIn">
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+</arguments>
+<assign>
+<var>${SIZE}</var>
+</assign>
+<msg timestamp="20200112 21:31:42.404" level="INFO">Length is 4</msg>
+<msg timestamp="20200112 21:31:42.404" level="INFO">${SIZE} = 4</msg>
+<status status="PASS" starttime="20200112 21:31:42.403" endtime="20200112 21:31:42.404"></status>
+</kw>
+<kw name="Log List" library="Collections">
+<doc>Logs the length and contents of the ``list`` using given ``level``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:42.405" level="INFO">List length is 4 and it contains following items:
+0: {'ID': 37, 'IDBook': 10, 'FirstName': 'First Name 37', 'LastName': 'Last Name 37'}
+1: {'ID': 38, 'IDBook': 10, 'FirstName': 'First Name 38', 'LastName': 'Last Name 38'}
+2: {'ID': 39, 'IDBook': 10, 'FirstName': 'First Name 39', 'LastName': 'Last Name 39'}
+3: {'ID': 40, 'IDBook': 10, 'FirstName': 'First Name 40', 'LastName': 'Last Name 40'}</msg>
+<status status="PASS" starttime="20200112 21:31:42.404" endtime="20200112 21:31:42.405"></status>
+</kw>
+<kw name="${COUNT} IN RANGE [ 0 | ${SIZE} ]" type="for">
+<kw name="${COUNT} = 0" type="foritem">
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>${COUNT}</arg>
+</arguments>
+<assign>
+<var>${DIC}</var>
+</assign>
+<msg timestamp="20200112 21:31:42.407" level="INFO">${DIC} = {'ID': 37, 'IDBook': 10, 'FirstName': 'First Name 37', 'LastName': 'Last Name 37'}</msg>
+<status status="PASS" starttime="20200112 21:31:42.406" endtime="20200112 21:31:42.407"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${DIC}</arg>
+<arg>IDBook</arg>
+<arg>10</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:42.408" endtime="20200112 21:31:42.409"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${COUNT} == ${SIZE}</arg>
+<arg>Log</arg>
+<arg>LOOP CLOSED</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:42.409" endtime="20200112 21:31:42.410"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.406" endtime="20200112 21:31:42.410"></status>
+</kw>
+<kw name="${COUNT} = 1" type="foritem">
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>${COUNT}</arg>
+</arguments>
+<assign>
+<var>${DIC}</var>
+</assign>
+<msg timestamp="20200112 21:31:42.411" level="INFO">${DIC} = {'ID': 38, 'IDBook': 10, 'FirstName': 'First Name 38', 'LastName': 'Last Name 38'}</msg>
+<status status="PASS" starttime="20200112 21:31:42.410" endtime="20200112 21:31:42.411"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${DIC}</arg>
+<arg>IDBook</arg>
+<arg>10</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:42.412" endtime="20200112 21:31:42.412"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${COUNT} == ${SIZE}</arg>
+<arg>Log</arg>
+<arg>LOOP CLOSED</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:42.413" endtime="20200112 21:31:42.413"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.410" endtime="20200112 21:31:42.414"></status>
+</kw>
+<kw name="${COUNT} = 2" type="foritem">
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>${COUNT}</arg>
+</arguments>
+<assign>
+<var>${DIC}</var>
+</assign>
+<msg timestamp="20200112 21:31:42.415" level="INFO">${DIC} = {'ID': 39, 'IDBook': 10, 'FirstName': 'First Name 39', 'LastName': 'Last Name 39'}</msg>
+<status status="PASS" starttime="20200112 21:31:42.414" endtime="20200112 21:31:42.416"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${DIC}</arg>
+<arg>IDBook</arg>
+<arg>10</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:42.416" endtime="20200112 21:31:42.417"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${COUNT} == ${SIZE}</arg>
+<arg>Log</arg>
+<arg>LOOP CLOSED</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:42.417" endtime="20200112 21:31:42.419"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.414" endtime="20200112 21:31:42.419"></status>
+</kw>
+<kw name="${COUNT} = 3" type="foritem">
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>${COUNT}</arg>
+</arguments>
+<assign>
+<var>${DIC}</var>
+</assign>
+<msg timestamp="20200112 21:31:42.421" level="INFO">${DIC} = {'ID': 40, 'IDBook': 10, 'FirstName': 'First Name 40', 'LastName': 'Last Name 40'}</msg>
+<status status="PASS" starttime="20200112 21:31:42.420" endtime="20200112 21:31:42.421"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${DIC}</arg>
+<arg>IDBook</arg>
+<arg>10</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:42.422" endtime="20200112 21:31:42.422"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${COUNT} == ${SIZE}</arg>
+<arg>Log</arg>
+<arg>LOOP CLOSED</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:42.423" endtime="20200112 21:31:42.424"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.419" endtime="20200112 21:31:42.424"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.406" endtime="20200112 21:31:42.424"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.402" endtime="20200112 21:31:42.424"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:41.445" endtime="20200112 21:31:42.425" critical="yes"></status>
+</test>
+<test id="s1-t2" name="Scenario 2: Request from All Available Authors (GET)">
+<kw name="Given I do a requirement to return a list with all authors" library="ResourceAuthors">
+<kw name="Get Request" library="ExtendedRequestsLibrary">
+<doc>Send a GET request on the session object found in the cache using the given ``label``.</doc>
+<arguments>
+<arg>apiTeste</arg>
+<arg>api/Authors</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200112 21:31:42.654" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200112 21:31:42.427" endtime="20200112 21:31:42.654"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.text}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:42.655" level="INFO">[{"ID":1,"IDBook":1,"FirstName":"First Name 1","LastName":"Last Name 1"},{"ID":2,"IDBook":1,"FirstName":"First Name 2","LastName":"Last Name 2"},{"ID":3,"IDBook":1,"FirstName":"First Name 3","LastName":"Last Name 3"},{"ID":4,"IDBook":2,"FirstName":"First Name 4","LastName":"Last Name 4"},{"ID":5,"IDBook":2,"FirstName":"First Name 5","LastName":"Last Name 5"},{"ID":6,"IDBook":2,"FirstName":"First Name 6","LastName":"Last Name 6"},{"ID":7,"IDBook":3,"FirstName":"First Name 7","LastName":"Last Name 7"},{"ID":8,"IDBook":3,"FirstName":"First Name 8","LastName":"Last Name 8"},{"ID":9,"IDBook":3,"FirstName":"First Name 9","LastName":"Last Name 9"},{"ID":10,"IDBook":4,"FirstName":"First Name 10","LastName":"Last Name 10"},{"ID":11,"IDBook":4,"FirstName":"First Name 11","LastName":"Last Name 11"},{"ID":12,"IDBook":4,"FirstName":"First Name 12","LastName":"Last Name 12"},{"ID":13,"IDBook":5,"FirstName":"First Name 13","LastName":"Last Name 13"},{"ID":14,"IDBook":5,"FirstName":"First Name 14","LastName":"Last Name 14"},{"ID":15,"IDBook":5,"FirstName":"First Name 15","LastName":"Last Name 15"},{"ID":16,"IDBook":6,"FirstName":"First Name 16","LastName":"Last Name 16"},{"ID":17,"IDBook":6,"FirstName":"First Name 17","LastName":"Last Name 17"},{"ID":18,"IDBook":6,"FirstName":"First Name 18","LastName":"Last Name 18"},{"ID":19,"IDBook":7,"FirstName":"First Name 19","LastName":"Last Name 19"},{"ID":20,"IDBook":7,"FirstName":"First Name 20","LastName":"Last Name 20"},{"ID":21,"IDBook":7,"FirstName":"First Name 21","LastName":"Last Name 21"},{"ID":22,"IDBook":8,"FirstName":"First Name 22","LastName":"Last Name 22"},{"ID":23,"IDBook":8,"FirstName":"First Name 23","LastName":"Last Name 23"},{"ID":24,"IDBook":8,"FirstName":"First Name 24","LastName":"Last Name 24"},{"ID":25,"IDBook":9,"FirstName":"First Name 25","LastName":"Last Name 25"},{"ID":26,"IDBook":9,"FirstName":"First Name 26","LastName":"Last Name 26"},{"ID":27,"IDBook":9,"FirstName":"First Name 27","LastName":"Last Name 27"},{"ID":28,"IDBook":10,"FirstName":"First Name 28","LastName":"Last Name 28"},{"ID":29,"IDBook":10,"FirstName":"First Name 29","LastName":"Last Name 29"},{"ID":30,"IDBook":10,"FirstName":"First Name 30","LastName":"Last Name 30"},{"ID":31,"IDBook":11,"FirstName":"First Name 31","LastName":"Last Name 31"},{"ID":32,"IDBook":11,"FirstName":"First Name 32","LastName":"Last Name 32"},{"ID":33,"IDBook":11,"FirstName":"First Name 33","LastName":"Last Name 33"},{"ID":34,"IDBook":12,"FirstName":"First Name 34","LastName":"Last Name 34"},{"ID":35,"IDBook":12,"FirstName":"First Name 35","LastName":"Last Name 35"},{"ID":36,"IDBook":12,"FirstName":"First Name 36","LastName":"Last Name 36"},{"ID":37,"IDBook":13,"FirstName":"First Name 37","LastName":"Last Name 37"},{"ID":38,"IDBook":13,"FirstName":"First Name 38","LastName":"Last Name 38"},{"ID":39,"IDBook":13,"FirstName":"First Name 39","LastName":"Last Name 39"},{"ID":40,"IDBook":14,"FirstName":"First Name 40","LastName":"Last Name 40"},{"ID":41,"IDBook":14,"FirstName":"First Name 41","LastName":"Last Name 41"},{"ID":42,"IDBook":14,"FirstName":"First Name 42","LastName":"Last Name 42"},{"ID":43,"IDBook":15,"FirstName":"First Name 43","LastName":"Last Name 43"},{"ID":44,"IDBook":15,"FirstName":"First Name 44","LastName":"Last Name 44"},{"ID":45,"IDBook":15,"FirstName":"First Name 45","LastName":"Last Name 45"},{"ID":46,"IDBook":16,"FirstName":"First Name 46","LastName":"Last Name 46"},{"ID":47,"IDBook":16,"FirstName":"First Name 47","LastName":"Last Name 47"},{"ID":48,"IDBook":16,"FirstName":"First Name 48","LastName":"Last Name 48"},{"ID":49,"IDBook":17,"FirstName":"First Name 49","LastName":"Last Name 49"},{"ID":50,"IDBook":17,"FirstName":"First Name 50","LastName":"Last Name 50"},{"ID":51,"IDBook":17,"FirstName":"First Name 51","LastName":"Last Name 51"},{"ID":52,"IDBook":18,"FirstName":"First Name 52","LastName":"Last Name 52"},{"ID":53,"IDBook":18,"FirstName":"First Name 53","LastName":"Last Name 53"},{"ID":54,"IDBook":18,"FirstName":"First Name 54","LastName":"Last Name 54"},{"ID":55,"IDBook":19,"FirstName":"First Name 55","LastName":"Last Name 55"},{"ID":56,"IDBook":19,"FirstName":"First Name 56","LastName":"Last Name 56"},{"ID":57,"IDBook":19,"FirstName":"First Name 57","LastName":"Last Name 57"},{"ID":58,"IDBook":20,"FirstName":"First Name 58","LastName":"Last Name 58"},{"ID":59,"IDBook":20,"FirstName":"First Name 59","LastName":"Last Name 59"},{"ID":60,"IDBook":20,"FirstName":"First Name 60","LastName":"Last Name 60"},{"ID":61,"IDBook":21,"FirstName":"First Name 61","LastName":"Last Name 61"},{"ID":62,"IDBook":21,"FirstName":"First Name 62","LastName":"Last Name 62"},{"ID":63,"IDBook":21,"FirstName":"First Name 63","LastName":"Last Name 63"},{"ID":64,"IDBook":22,"FirstName":"First Name 64","LastName":"Last Name 64"},{"ID":65,"IDBook":22,"FirstName":"First Name 65","LastName":"Last Name 65"},{"ID":66,"IDBook":22,"FirstName":"First Name 66","LastName":"Last Name 66"},{"ID":67,"IDBook":23,"FirstName":"First Name 67","LastName":"Last Name 67"},{"ID":68,"IDBook":23,"FirstName":"First Name 68","LastName":"Last Name 68"},{"ID":69,"IDBook":23,"FirstName":"First Name 69","LastName":"Last Name 69"},{"ID":70,"IDBook":24,"FirstName":"First Name 70","LastName":"Last Name 70"},{"ID":71,"IDBook":24,"FirstName":"First Name 71","LastName":"Last Name 71"},{"ID":72,"IDBook":24,"FirstName":"First Name 72","LastName":"Last Name 72"},{"ID":73,"IDBook":25,"FirstName":"First Name 73","LastName":"Last Name 73"},{"ID":74,"IDBook":25,"FirstName":"First Name 74","LastName":"Last Name 74"},{"ID":75,"IDBook":25,"FirstName":"First Name 75","LastName":"Last Name 75"},{"ID":76,"IDBook":26,"FirstName":"First Name 76","LastName":"Last Name 76"},{"ID":77,"IDBook":26,"FirstName":"First Name 77","LastName":"Last Name 77"},{"ID":78,"IDBook":26,"FirstName":"First Name 78","LastName":"Last Name 78"},{"ID":79,"IDBook":27,"FirstName":"First Name 79","LastName":"Last Name 79"},{"ID":80,"IDBook":27,"FirstName":"First Name 80","LastName":"Last Name 80"},{"ID":81,"IDBook":27,"FirstName":"First Name 81","LastName":"Last Name 81"},{"ID":82,"IDBook":28,"FirstName":"First Name 82","LastName":"Last Name 82"},{"ID":83,"IDBook":28,"FirstName":"First Name 83","LastName":"Last Name 83"},{"ID":84,"IDBook":28,"FirstName":"First Name 84","LastName":"Last Name 84"},{"ID":85,"IDBook":29,"FirstName":"First Name 85","LastName":"Last Name 85"},{"ID":86,"IDBook":29,"FirstName":"First Name 86","LastName":"Last Name 86"},{"ID":87,"IDBook":29,"FirstName":"First Name 87","LastName":"Last Name 87"},{"ID":88,"IDBook":30,"FirstName":"First Name 88","LastName":"Last Name 88"},{"ID":89,"IDBook":30,"FirstName":"First Name 89","LastName":"Last Name 89"},{"ID":90,"IDBook":30,"FirstName":"First Name 90","LastName":"Last Name 90"},{"ID":91,"IDBook":31,"FirstName":"First Name 91","LastName":"Last Name 91"},{"ID":92,"IDBook":31,"FirstName":"First Name 92","LastName":"Last Name 92"},{"ID":93,"IDBook":31,"FirstName":"First Name 93","LastName":"Last Name 93"},{"ID":94,"IDBook":32,"FirstName":"First Name 94","LastName":"Last Name 94"},{"ID":95,"IDBook":32,"FirstName":"First Name 95","LastName":"Last Name 95"},{"ID":96,"IDBook":32,"FirstName":"First Name 96","LastName":"Last Name 96"},{"ID":97,"IDBook":33,"FirstName":"First Name 97","LastName":"Last Name 97"},{"ID":98,"IDBook":33,"FirstName":"First Name 98","LastName":"Last Name 98"},{"ID":99,"IDBook":33,"FirstName":"First Name 99","LastName":"Last Name 99"},{"ID":100,"IDBook":34,"FirstName":"First Name 100","LastName":"Last Name 100"},{"ID":101,"IDBook":34,"FirstName":"First Name 101","LastName":"Last Name 101"},{"ID":102,"IDBook":34,"FirstName":"First Name 102","LastName":"Last Name 102"},{"ID":103,"IDBook":35,"FirstName":"First Name 103","LastName":"Last Name 103"},{"ID":104,"IDBook":35,"FirstName":"First Name 104","LastName":"Last Name 104"},{"ID":105,"IDBook":35,"FirstName":"First Name 105","LastName":"Last Name 105"},{"ID":106,"IDBook":36,"FirstName":"First Name 106","LastName":"Last Name 106"},{"ID":107,"IDBook":36,"FirstName":"First Name 107","LastName":"Last Name 107"},{"ID":108,"IDBook":36,"FirstName":"First Name 108","LastName":"Last Name 108"},{"ID":109,"IDBook":37,"FirstName":"First Name 109","LastName":"Last Name 109"},{"ID":110,"IDBook":37,"FirstName":"First Name 110","LastName":"Last Name 110"},{"ID":111,"IDBook":37,"FirstName":"First Name 111","LastName":"Last Name 111"},{"ID":112,"IDBook":38,"FirstName":"First Name 112","LastName":"Last Name 112"},{"ID":113,"IDBook":38,"FirstName":"First Name 113","LastName":"Last Name 113"},{"ID":114,"IDBook":38,"FirstName":"First Name 114","LastName":"Last Name 114"},{"ID":115,"IDBook":39,"FirstName":"First Name 115","LastName":"Last Name 115"},{"ID":116,"IDBook":39,"FirstName":"First Name 116","LastName":"Last Name 116"},{"ID":117,"IDBook":39,"FirstName":"First Name 117","LastName":"Last Name 117"},{"ID":118,"IDBook":40,"FirstName":"First Name 118","LastName":"Last Name 118"},{"ID":119,"IDBook":40,"FirstName":"First Name 119","LastName":"Last Name 119"},{"ID":120,"IDBook":40,"FirstName":"First Name 120","LastName":"Last Name 120"},{"ID":121,"IDBook":41,"FirstName":"First Name 121","LastName":"Last Name 121"},{"ID":122,"IDBook":41,"FirstName":"First Name 122","LastName":"Last Name 122"},{"ID":123,"IDBook":41,"FirstName":"First Name 123","LastName":"Last Name 123"},{"ID":124,"IDBook":42,"FirstName":"First Name 124","LastName":"Last Name 124"},{"ID":125,"IDBook":42,"FirstName":"First Name 125","LastName":"Last Name 125"},{"ID":126,"IDBook":42,"FirstName":"First Name 126","LastName":"Last Name 126"},{"ID":127,"IDBook":43,"FirstName":"First Name 127","LastName":"Last Name 127"},{"ID":128,"IDBook":43,"FirstName":"First Name 128","LastName":"Last Name 128"},{"ID":129,"IDBook":43,"FirstName":"First Name 129","LastName":"Last Name 129"},{"ID":130,"IDBook":44,"FirstName":"First Name 130","LastName":"Last Name 130"},{"ID":131,"IDBook":44,"FirstName":"First Name 131","LastName":"Last Name 131"},{"ID":132,"IDBook":44,"FirstName":"First Name 132","LastName":"Last Name 132"},{"ID":133,"IDBook":45,"FirstName":"First Name 133","LastName":"Last Name 133"},{"ID":134,"IDBook":45,"FirstName":"First Name 134","LastName":"Last Name 134"},{"ID":135,"IDBook":45,"FirstName":"First Name 135","LastName":"Last Name 135"},{"ID":136,"IDBook":46,"FirstName":"First Name 136","LastName":"Last Name 136"},{"ID":137,"IDBook":46,"FirstName":"First Name 137","LastName":"Last Name 137"},{"ID":138,"IDBook":46,"FirstName":"First Name 138","LastName":"Last Name 138"},{"ID":139,"IDBook":47,"FirstName":"First Name 139","LastName":"Last Name 139"},{"ID":140,"IDBook":47,"FirstName":"First Name 140","LastName":"Last Name 140"},{"ID":141,"IDBook":47,"FirstName":"First Name 141","LastName":"Last Name 141"},{"ID":142,"IDBook":48,"FirstName":"First Name 142","LastName":"Last Name 142"},{"ID":143,"IDBook":48,"FirstName":"First Name 143","LastName":"Last Name 143"},{"ID":144,"IDBook":48,"FirstName":"First Name 144","LastName":"Last Name 144"},{"ID":145,"IDBook":49,"FirstName":"First Name 145","LastName":"Last Name 145"},{"ID":146,"IDBook":49,"FirstName":"First Name 146","LastName":"Last Name 146"},{"ID":147,"IDBook":49,"FirstName":"First Name 147","LastName":"Last Name 147"},{"ID":148,"IDBook":50,"FirstName":"First Name 148","LastName":"Last Name 148"},{"ID":149,"IDBook":50,"FirstName":"First Name 149","LastName":"Last Name 149"},{"ID":150,"IDBook":50,"FirstName":"First Name 150","LastName":"Last Name 150"},{"ID":151,"IDBook":51,"FirstName":"First Name 151","LastName":"Last Name 151"},{"ID":152,"IDBook":51,"FirstName":"First Name 152","LastName":"Last Name 152"},{"ID":153,"IDBook":51,"FirstName":"First Name 153","LastName":"Last Name 153"},{"ID":154,"IDBook":52,"FirstName":"First Name 154","LastName":"Last Name 154"},{"ID":155,"IDBook":52,"FirstName":"First Name 155","LastName":"Last Name 155"},{"ID":156,"IDBook":52,"FirstName":"First Name 156","LastName":"Last Name 156"},{"ID":157,"IDBook":53,"FirstName":"First Name 157","LastName":"Last Name 157"},{"ID":158,"IDBook":53,"FirstName":"First Name 158","LastName":"Last Name 158"},{"ID":159,"IDBook":53,"FirstName":"First Name 159","LastName":"Last Name 159"},{"ID":160,"IDBook":54,"FirstName":"First Name 160","LastName":"Last Name 160"},{"ID":161,"IDBook":54,"FirstName":"First Name 161","LastName":"Last Name 161"},{"ID":162,"IDBook":54,"FirstName":"First Name 162","LastName":"Last Name 162"},{"ID":163,"IDBook":55,"FirstName":"First Name 163","LastName":"Last Name 163"},{"ID":164,"IDBook":55,"FirstName":"First Name 164","LastName":"Last Name 164"},{"ID":165,"IDBook":55,"FirstName":"First Name 165","LastName":"Last Name 165"},{"ID":166,"IDBook":56,"FirstName":"First Name 166","LastName":"Last Name 166"},{"ID":167,"IDBook":56,"FirstName":"First Name 167","LastName":"Last Name 167"},{"ID":168,"IDBook":56,"FirstName":"First Name 168","LastName":"Last Name 168"},{"ID":169,"IDBook":57,"FirstName":"First Name 169","LastName":"Last Name 169"},{"ID":170,"IDBook":57,"FirstName":"First Name 170","LastName":"Last Name 170"},{"ID":171,"IDBook":57,"FirstName":"First Name 171","LastName":"Last Name 171"},{"ID":172,"IDBook":58,"FirstName":"First Name 172","LastName":"Last Name 172"},{"ID":173,"IDBook":58,"FirstName":"First Name 173","LastName":"Last Name 173"},{"ID":174,"IDBook":58,"FirstName":"First Name 174","LastName":"Last Name 174"},{"ID":175,"IDBook":59,"FirstName":"First Name 175","LastName":"Last Name 175"},{"ID":176,"IDBook":59,"FirstName":"First Name 176","LastName":"Last Name 176"},{"ID":177,"IDBook":59,"FirstName":"First Name 177","LastName":"Last Name 177"},{"ID":178,"IDBook":60,"FirstName":"First Name 178","LastName":"Last Name 178"},{"ID":179,"IDBook":60,"FirstName":"First Name 179","LastName":"Last Name 179"},{"ID":180,"IDBook":60,"FirstName":"First Name 180","LastName":"Last Name 180"},{"ID":181,"IDBook":61,"FirstName":"First Name 181","LastName":"Last Name 181"},{"ID":182,"IDBook":61,"FirstName":"First Name 182","LastName":"Last Name 182"},{"ID":183,"IDBook":61,"FirstName":"First Name 183","LastName":"Last Name 183"},{"ID":184,"IDBook":62,"FirstName":"First Name 184","LastName":"Last Name 184"},{"ID":185,"IDBook":62,"FirstName":"First Name 185","LastName":"Last Name 185"},{"ID":186,"IDBook":62,"FirstName":"First Name 186","LastName":"Last Name 186"},{"ID":187,"IDBook":63,"FirstName":"First Name 187","LastName":"Last Name 187"},{"ID":188,"IDBook":63,"FirstName":"First Name 188","LastName":"Last Name 188"},{"ID":189,"IDBook":63,"FirstName":"First Name 189","LastName":"Last Name 189"},{"ID":190,"IDBook":64,"FirstName":"First Name 190","LastName":"Last Name 190"},{"ID":191,"IDBook":64,"FirstName":"First Name 191","LastName":"Last Name 191"},{"ID":192,"IDBook":64,"FirstName":"First Name 192","LastName":"Last Name 192"},{"ID":193,"IDBook":65,"FirstName":"First Name 193","LastName":"Last Name 193"},{"ID":194,"IDBook":65,"FirstName":"First Name 194","LastName":"Last Name 194"},{"ID":195,"IDBook":65,"FirstName":"First Name 195","LastName":"Last Name 195"},{"ID":196,"IDBook":66,"FirstName":"First Name 196","LastName":"Last Name 196"},{"ID":197,"IDBook":66,"FirstName":"First Name 197","LastName":"Last Name 197"},{"ID":198,"IDBook":66,"FirstName":"First Name 198","LastName":"Last Name 198"},{"ID":199,"IDBook":67,"FirstName":"First Name 199","LastName":"Last Name 199"},{"ID":200,"IDBook":67,"FirstName":"First Name 200","LastName":"Last Name 200"},{"ID":201,"IDBook":67,"FirstName":"First Name 201","LastName":"Last Name 201"},{"ID":202,"IDBook":68,"FirstName":"First Name 202","LastName":"Last Name 202"},{"ID":203,"IDBook":68,"FirstName":"First Name 203","LastName":"Last Name 203"},{"ID":204,"IDBook":68,"FirstName":"First Name 204","LastName":"Last Name 204"},{"ID":205,"IDBook":69,"FirstName":"First Name 205","LastName":"Last Name 205"},{"ID":206,"IDBook":69,"FirstName":"First Name 206","LastName":"Last Name 206"},{"ID":207,"IDBook":69,"FirstName":"First Name 207","LastName":"Last Name 207"},{"ID":208,"IDBook":70,"FirstName":"First Name 208","LastName":"Last Name 208"},{"ID":209,"IDBook":70,"FirstName":"First Name 209","LastName":"Last Name 209"},{"ID":210,"IDBook":70,"FirstName":"First Name 210","LastName":"Last Name 210"},{"ID":211,"IDBook":71,"FirstName":"First Name 211","LastName":"Last Name 211"},{"ID":212,"IDBook":71,"FirstName":"First Name 212","LastName":"Last Name 212"},{"ID":213,"IDBook":71,"FirstName":"First Name 213","LastName":"Last Name 213"},{"ID":214,"IDBook":72,"FirstName":"First Name 214","LastName":"Last Name 214"},{"ID":215,"IDBook":72,"FirstName":"First Name 215","LastName":"Last Name 215"},{"ID":216,"IDBook":72,"FirstName":"First Name 216","LastName":"Last Name 216"},{"ID":217,"IDBook":73,"FirstName":"First Name 217","LastName":"Last Name 217"},{"ID":218,"IDBook":73,"FirstName":"First Name 218","LastName":"Last Name 218"},{"ID":219,"IDBook":73,"FirstName":"First Name 219","LastName":"Last Name 219"},{"ID":220,"IDBook":74,"FirstName":"First Name 220","LastName":"Last Name 220"},{"ID":221,"IDBook":74,"FirstName":"First Name 221","LastName":"Last Name 221"},{"ID":222,"IDBook":74,"FirstName":"First Name 222","LastName":"Last Name 222"},{"ID":223,"IDBook":75,"FirstName":"First Name 223","LastName":"Last Name 223"},{"ID":224,"IDBook":75,"FirstName":"First Name 224","LastName":"Last Name 224"},{"ID":225,"IDBook":75,"FirstName":"First Name 225","LastName":"Last Name 225"},{"ID":226,"IDBook":76,"FirstName":"First Name 226","LastName":"Last Name 226"},{"ID":227,"IDBook":76,"FirstName":"First Name 227","LastName":"Last Name 227"},{"ID":228,"IDBook":76,"FirstName":"First Name 228","LastName":"Last Name 228"},{"ID":229,"IDBook":77,"FirstName":"First Name 229","LastName":"Last Name 229"},{"ID":230,"IDBook":77,"FirstName":"First Name 230","LastName":"Last Name 230"},{"ID":231,"IDBook":77,"FirstName":"First Name 231","LastName":"Last Name 231"},{"ID":232,"IDBook":78,"FirstName":"First Name 232","LastName":"Last Name 232"},{"ID":233,"IDBook":78,"FirstName":"First Name 233","LastName":"Last Name 233"},{"ID":234,"IDBook":78,"FirstName":"First Name 234","LastName":"Last Name 234"},{"ID":235,"IDBook":79,"FirstName":"First Name 235","LastName":"Last Name 235"},{"ID":236,"IDBook":79,"FirstName":"First Name 236","LastName":"Last Name 236"},{"ID":237,"IDBook":79,"FirstName":"First Name 237","LastName":"Last Name 237"},{"ID":238,"IDBook":80,"FirstName":"First Name 238","LastName":"Last Name 238"},{"ID":239,"IDBook":80,"FirstName":"First Name 239","LastName":"Last Name 239"},{"ID":240,"IDBook":80,"FirstName":"First Name 240","LastName":"Last Name 240"},{"ID":241,"IDBook":81,"FirstName":"First Name 241","LastName":"Last Name 241"},{"ID":242,"IDBook":81,"FirstName":"First Name 242","LastName":"Last Name 242"},{"ID":243,"IDBook":81,"FirstName":"First Name 243","LastName":"Last Name 243"},{"ID":244,"IDBook":82,"FirstName":"First Name 244","LastName":"Last Name 244"},{"ID":245,"IDBook":82,"FirstName":"First Name 245","LastName":"Last Name 245"},{"ID":246,"IDBook":82,"FirstName":"First Name 246","LastName":"Last Name 246"},{"ID":247,"IDBook":83,"FirstName":"First Name 247","LastName":"Last Name 247"},{"ID":248,"IDBook":83,"FirstName":"First Name 248","LastName":"Last Name 248"},{"ID":249,"IDBook":83,"FirstName":"First Name 249","LastName":"Last Name 249"},{"ID":250,"IDBook":84,"FirstName":"First Name 250","LastName":"Last Name 250"},{"ID":251,"IDBook":84,"FirstName":"First Name 251","LastName":"Last Name 251"},{"ID":252,"IDBook":84,"FirstName":"First Name 252","LastName":"Last Name 252"},{"ID":253,"IDBook":85,"FirstName":"First Name 253","LastName":"Last Name 253"},{"ID":254,"IDBook":85,"FirstName":"First Name 254","LastName":"Last Name 254"},{"ID":255,"IDBook":85,"FirstName":"First Name 255","LastName":"Last Name 255"},{"ID":256,"IDBook":86,"FirstName":"First Name 256","LastName":"Last Name 256"},{"ID":257,"IDBook":86,"FirstName":"First Name 257","LastName":"Last Name 257"},{"ID":258,"IDBook":86,"FirstName":"First Name 258","LastName":"Last Name 258"},{"ID":259,"IDBook":87,"FirstName":"First Name 259","LastName":"Last Name 259"},{"ID":260,"IDBook":87,"FirstName":"First Name 260","LastName":"Last Name 260"},{"ID":261,"IDBook":87,"FirstName":"First Name 261","LastName":"Last Name 261"},{"ID":262,"IDBook":88,"FirstName":"First Name 262","LastName":"Last Name 262"},{"ID":263,"IDBook":88,"FirstName":"First Name 263","LastName":"Last Name 263"},{"ID":264,"IDBook":88,"FirstName":"First Name 264","LastName":"Last Name 264"},{"ID":265,"IDBook":89,"FirstName":"First Name 265","LastName":"Last Name 265"},{"ID":266,"IDBook":89,"FirstName":"First Name 266","LastName":"Last Name 266"},{"ID":267,"IDBook":89,"FirstName":"First Name 267","LastName":"Last Name 267"},{"ID":268,"IDBook":90,"FirstName":"First Name 268","LastName":"Last Name 268"},{"ID":269,"IDBook":90,"FirstName":"First Name 269","LastName":"Last Name 269"},{"ID":270,"IDBook":90,"FirstName":"First Name 270","LastName":"Last Name 270"},{"ID":271,"IDBook":91,"FirstName":"First Name 271","LastName":"Last Name 271"},{"ID":272,"IDBook":91,"FirstName":"First Name 272","LastName":"Last Name 272"},{"ID":273,"IDBook":91,"FirstName":"First Name 273","LastName":"Last Name 273"},{"ID":274,"IDBook":92,"FirstName":"First Name 274","LastName":"Last Name 274"},{"ID":275,"IDBook":92,"FirstName":"First Name 275","LastName":"Last Name 275"},{"ID":276,"IDBook":92,"FirstName":"First Name 276","LastName":"Last Name 276"},{"ID":277,"IDBook":93,"FirstName":"First Name 277","LastName":"Last Name 277"},{"ID":278,"IDBook":93,"FirstName":"First Name 278","LastName":"Last Name 278"},{"ID":279,"IDBook":93,"FirstName":"First Name 279","LastName":"Last Name 279"},{"ID":280,"IDBook":94,"FirstName":"First Name 280","LastName":"Last Name 280"},{"ID":281,"IDBook":94,"FirstName":"First Name 281","LastName":"Last Name 281"},{"ID":282,"IDBook":94,"FirstName":"First Name 282","LastName":"Last Name 282"},{"ID":283,"IDBook":95,"FirstName":"First Name 283","LastName":"Last Name 283"},{"ID":284,"IDBook":95,"FirstName":"First Name 284","LastName":"Last Name 284"},{"ID":285,"IDBook":95,"FirstName":"First Name 285","LastName":"Last Name 285"},{"ID":286,"IDBook":96,"FirstName":"First Name 286","LastName":"Last Name 286"},{"ID":287,"IDBook":96,"FirstName":"First Name 287","LastName":"Last Name 287"},{"ID":288,"IDBook":96,"FirstName":"First Name 288","LastName":"Last Name 288"},{"ID":289,"IDBook":97,"FirstName":"First Name 289","LastName":"Last Name 289"},{"ID":290,"IDBook":97,"FirstName":"First Name 290","LastName":"Last Name 290"},{"ID":291,"IDBook":97,"FirstName":"First Name 291","LastName":"Last Name 291"},{"ID":292,"IDBook":98,"FirstName":"First Name 292","LastName":"Last Name 292"},{"ID":293,"IDBook":98,"FirstName":"First Name 293","LastName":"Last Name 293"},{"ID":294,"IDBook":98,"FirstName":"First Name 294","LastName":"Last Name 294"},{"ID":295,"IDBook":99,"FirstName":"First Name 295","LastName":"Last Name 295"},{"ID":296,"IDBook":99,"FirstName":"First Name 296","LastName":"Last Name 296"},{"ID":297,"IDBook":99,"FirstName":"First Name 297","LastName":"Last Name 297"},{"ID":298,"IDBook":100,"FirstName":"First Name 298","LastName":"Last Name 298"},{"ID":299,"IDBook":100,"FirstName":"First Name 299","LastName":"Last Name 299"},{"ID":300,"IDBook":100,"FirstName":"First Name 300","LastName":"Last Name 300"},{"ID":301,"IDBook":101,"FirstName":"First Name 301","LastName":"Last Name 301"},{"ID":302,"IDBook":101,"FirstName":"First Name 302","LastName":"Last Name 302"},{"ID":303,"IDBook":101,"FirstName":"First Name 303","LastName":"Last Name 303"},{"ID":304,"IDBook":102,"FirstName":"First Name 304","LastName":"Last Name 304"},{"ID":305,"IDBook":102,"FirstName":"First Name 305","LastName":"Last Name 305"},{"ID":306,"IDBook":102,"FirstName":"First Name 306","LastName":"Last Name 306"},{"ID":307,"IDBook":103,"FirstName":"First Name 307","LastName":"Last Name 307"},{"ID":308,"IDBook":103,"FirstName":"First Name 308","LastName":"Last Name 308"},{"ID":309,"IDBook":103,"FirstName":"First Name 309","LastName":"Last Name 309"},{"ID":310,"IDBook":104,"FirstName":"First Name 310","LastName":"Last Name 310"},{"ID":311,"IDBook":104,"FirstName":"First Name 311","LastName":"Last Name 311"},{"ID":312,"IDBook":104,"FirstName":"First Name 312","LastName":"Last Name 312"},{"ID":313,"IDBook":105,"FirstName":"First Name 313","LastName":"Last Name 313"},{"ID":314,"IDBook":105,"FirstName":"First Name 314","LastName":"Last Name 314"},{"ID":315,"IDBook":105,"FirstName":"First Name 315","LastName":"Last Name 315"},{"ID":316,"IDBook":106,"FirstName":"First Name 316","LastName":"Last Name 316"},{"ID":317,"IDBook":106,"FirstName":"First Name 317","LastName":"Last Name 317"},{"ID":318,"IDBook":106,"FirstName":"First Name 318","LastName":"Last Name 318"},{"ID":319,"IDBook":107,"FirstName":"First Name 319","LastName":"Last Name 319"},{"ID":320,"IDBook":107,"FirstName":"First Name 320","LastName":"Last Name 320"},{"ID":321,"IDBook":107,"FirstName":"First Name 321","LastName":"Last Name 321"},{"ID":322,"IDBook":108,"FirstName":"First Name 322","LastName":"Last Name 322"},{"ID":323,"IDBook":108,"FirstName":"First Name 323","LastName":"Last Name 323"},{"ID":324,"IDBook":108,"FirstName":"First Name 324","LastName":"Last Name 324"},{"ID":325,"IDBook":109,"FirstName":"First Name 325","LastName":"Last Name 325"},{"ID":326,"IDBook":109,"FirstName":"First Name 326","LastName":"Last Name 326"},{"ID":327,"IDBook":109,"FirstName":"First Name 327","LastName":"Last Name 327"},{"ID":328,"IDBook":110,"FirstName":"First Name 328","LastName":"Last Name 328"},{"ID":329,"IDBook":110,"FirstName":"First Name 329","LastName":"Last Name 329"},{"ID":330,"IDBook":110,"FirstName":"First Name 330","LastName":"Last Name 330"},{"ID":331,"IDBook":111,"FirstName":"First Name 331","LastName":"Last Name 331"},{"ID":332,"IDBook":111,"FirstName":"First Name 332","LastName":"Last Name 332"},{"ID":333,"IDBook":111,"FirstName":"First Name 333","LastName":"Last Name 333"},{"ID":334,"IDBook":112,"FirstName":"First Name 334","LastName":"Last Name 334"},{"ID":335,"IDBook":112,"FirstName":"First Name 335","LastName":"Last Name 335"},{"ID":336,"IDBook":112,"FirstName":"First Name 336","LastName":"Last Name 336"},{"ID":337,"IDBook":113,"FirstName":"First Name 337","LastName":"Last Name 337"},{"ID":338,"IDBook":113,"FirstName":"First Name 338","LastName":"Last Name 338"},{"ID":339,"IDBook":113,"FirstName":"First Name 339","LastName":"Last Name 339"},{"ID":340,"IDBook":114,"FirstName":"First Name 340","LastName":"Last Name 340"},{"ID":341,"IDBook":114,"FirstName":"First Name 341","LastName":"Last Name 341"},{"ID":342,"IDBook":114,"FirstName":"First Name 342","LastName":"Last Name 342"},{"ID":343,"IDBook":115,"FirstName":"First Name 343","LastName":"Last Name 343"},{"ID":344,"IDBook":115,"FirstName":"First Name 344","LastName":"Last Name 344"},{"ID":345,"IDBook":115,"FirstName":"First Name 345","LastName":"Last Name 345"},{"ID":346,"IDBook":116,"FirstName":"First Name 346","LastName":"Last Name 346"},{"ID":347,"IDBook":116,"FirstName":"First Name 347","LastName":"Last Name 347"},{"ID":348,"IDBook":116,"FirstName":"First Name 348","LastName":"Last Name 348"},{"ID":349,"IDBook":117,"FirstName":"First Name 349","LastName":"Last Name 349"},{"ID":350,"IDBook":117,"FirstName":"First Name 350","LastName":"Last Name 350"},{"ID":351,"IDBook":117,"FirstName":"First Name 351","LastName":"Last Name 351"},{"ID":352,"IDBook":118,"FirstName":"First Name 352","LastName":"Last Name 352"},{"ID":353,"IDBook":118,"FirstName":"First Name 353","LastName":"Last Name 353"},{"ID":354,"IDBook":118,"FirstName":"First Name 354","LastName":"Last Name 354"},{"ID":355,"IDBook":119,"FirstName":"First Name 355","LastName":"Last Name 355"},{"ID":356,"IDBook":119,"FirstName":"First Name 356","LastName":"Last Name 356"},{"ID":357,"IDBook":119,"FirstName":"First Name 357","LastName":"Last Name 357"},{"ID":358,"IDBook":120,"FirstName":"First Name 358","LastName":"Last Name 358"},{"ID":359,"IDBook":120,"FirstName":"First Name 359","LastName":"Last Name 359"},{"ID":360,"IDBook":120,"FirstName":"First Name 360","LastName":"Last Name 360"},{"ID":361,"IDBook":121,"FirstName":"First Name 361","LastName":"Last Name 361"},{"ID":362,"IDBook":121,"FirstName":"First Name 362","LastName":"Last Name 362"},{"ID":363,"IDBook":121,"FirstName":"First Name 363","LastName":"Last Name 363"},{"ID":364,"IDBook":122,"FirstName":"First Name 364","LastName":"Last Name 364"},{"ID":365,"IDBook":122,"FirstName":"First Name 365","LastName":"Last Name 365"},{"ID":366,"IDBook":122,"FirstName":"First Name 366","LastName":"Last Name 366"},{"ID":367,"IDBook":123,"FirstName":"First Name 367","LastName":"Last Name 367"},{"ID":368,"IDBook":123,"FirstName":"First Name 368","LastName":"Last Name 368"},{"ID":369,"IDBook":123,"FirstName":"First Name 369","LastName":"Last Name 369"},{"ID":370,"IDBook":124,"FirstName":"First Name 370","LastName":"Last Name 370"},{"ID":371,"IDBook":124,"FirstName":"First Name 371","LastName":"Last Name 371"},{"ID":372,"IDBook":124,"FirstName":"First Name 372","LastName":"Last Name 372"},{"ID":373,"IDBook":125,"FirstName":"First Name 373","LastName":"Last Name 373"},{"ID":374,"IDBook":125,"FirstName":"First Name 374","LastName":"Last Name 374"},{"ID":375,"IDBook":125,"FirstName":"First Name 375","LastName":"Last Name 375"},{"ID":376,"IDBook":126,"FirstName":"First Name 376","LastName":"Last Name 376"},{"ID":377,"IDBook":126,"FirstName":"First Name 377","LastName":"Last Name 377"},{"ID":378,"IDBook":126,"FirstName":"First Name 378","LastName":"Last Name 378"},{"ID":379,"IDBook":127,"FirstName":"First Name 379","LastName":"Last Name 379"},{"ID":380,"IDBook":127,"FirstName":"First Name 380","LastName":"Last Name 380"},{"ID":381,"IDBook":127,"FirstName":"First Name 381","LastName":"Last Name 381"},{"ID":382,"IDBook":128,"FirstName":"First Name 382","LastName":"Last Name 382"},{"ID":383,"IDBook":128,"FirstName":"First Name 383","LastName":"Last Name 383"},{"ID":384,"IDBook":128,"FirstName":"First Name 384","LastName":"Last Name 384"},{"ID":385,"IDBook":129,"FirstName":"First Name 385","LastName":"Last Name 385"},{"ID":386,"IDBook":129,"FirstName":"First Name 386","LastName":"Last Name 386"},{"ID":387,"IDBook":129,"FirstName":"First Name 387","LastName":"Last Name 387"},{"ID":388,"IDBook":130,"FirstName":"First Name 388","LastName":"Last Name 388"},{"ID":389,"IDBook":130,"FirstName":"First Name 389","LastName":"Last Name 389"},{"ID":390,"IDBook":130,"FirstName":"First Name 390","LastName":"Last Name 390"},{"ID":391,"IDBook":131,"FirstName":"First Name 391","LastName":"Last Name 391"},{"ID":392,"IDBook":131,"FirstName":"First Name 392","LastName":"Last Name 392"},{"ID":393,"IDBook":131,"FirstName":"First Name 393","LastName":"Last Name 393"},{"ID":394,"IDBook":132,"FirstName":"First Name 394","LastName":"Last Name 394"},{"ID":395,"IDBook":132,"FirstName":"First Name 395","LastName":"Last Name 395"},{"ID":396,"IDBook":132,"FirstName":"First Name 396","LastName":"Last Name 396"},{"ID":397,"IDBook":133,"FirstName":"First Name 397","LastName":"Last Name 397"},{"ID":398,"IDBook":133,"FirstName":"First Name 398","LastName":"Last Name 398"},{"ID":399,"IDBook":133,"FirstName":"First Name 399","LastName":"Last Name 399"},{"ID":400,"IDBook":134,"FirstName":"First Name 400","LastName":"Last Name 400"},{"ID":401,"IDBook":134,"FirstName":"First Name 401","LastName":"Last Name 401"},{"ID":402,"IDBook":134,"FirstName":"First Name 402","LastName":"Last Name 402"},{"ID":403,"IDBook":135,"FirstName":"First Name 403","LastName":"Last Name 403"},{"ID":404,"IDBook":135,"FirstName":"First Name 404","LastName":"Last Name 404"},{"ID":405,"IDBook":135,"FirstName":"First Name 405","LastName":"Last Name 405"},{"ID":406,"IDBook":136,"FirstName":"First Name 406","LastName":"Last Name 406"},{"ID":407,"IDBook":136,"FirstName":"First Name 407","LastName":"Last Name 407"},{"ID":408,"IDBook":136,"FirstName":"First Name 408","LastName":"Last Name 408"},{"ID":409,"IDBook":137,"FirstName":"First Name 409","LastName":"Last Name 409"},{"ID":410,"IDBook":137,"FirstName":"First Name 410","LastName":"Last Name 410"},{"ID":411,"IDBook":137,"FirstName":"First Name 411","LastName":"Last Name 411"},{"ID":412,"IDBook":138,"FirstName":"First Name 412","LastName":"Last Name 412"},{"ID":413,"IDBook":138,"FirstName":"First Name 413","LastName":"Last Name 413"},{"ID":414,"IDBook":138,"FirstName":"First Name 414","LastName":"Last Name 414"},{"ID":415,"IDBook":139,"FirstName":"First Name 415","LastName":"Last Name 415"},{"ID":416,"IDBook":139,"FirstName":"First Name 416","LastName":"Last Name 416"},{"ID":417,"IDBook":139,"FirstName":"First Name 417","LastName":"Last Name 417"},{"ID":418,"IDBook":140,"FirstName":"First Name 418","LastName":"Last Name 418"},{"ID":419,"IDBook":140,"FirstName":"First Name 419","LastName":"Last Name 419"},{"ID":420,"IDBook":140,"FirstName":"First Name 420","LastName":"Last Name 420"},{"ID":421,"IDBook":141,"FirstName":"First Name 421","LastName":"Last Name 421"},{"ID":422,"IDBook":141,"FirstName":"First Name 422","LastName":"Last Name 422"},{"ID":423,"IDBook":141,"FirstName":"First Name 423","LastName":"Last Name 423"},{"ID":424,"IDBook":142,"FirstName":"First Name 424","LastName":"Last Name 424"},{"ID":425,"IDBook":142,"FirstName":"First Name 425","LastName":"Last Name 425"},{"ID":426,"IDBook":142,"FirstName":"First Name 426","LastName":"Last Name 426"},{"ID":427,"IDBook":143,"FirstName":"First Name 427","LastName":"Last Name 427"},{"ID":428,"IDBook":143,"FirstName":"First Name 428","LastName":"Last Name 428"},{"ID":429,"IDBook":143,"FirstName":"First Name 429","LastName":"Last Name 429"},{"ID":430,"IDBook":144,"FirstName":"First Name 430","LastName":"Last Name 430"},{"ID":431,"IDBook":144,"FirstName":"First Name 431","LastName":"Last Name 431"},{"ID":432,"IDBook":144,"FirstName":"First Name 432","LastName":"Last Name 432"},{"ID":433,"IDBook":145,"FirstName":"First Name 433","LastName":"Last Name 433"},{"ID":434,"IDBook":145,"FirstName":"First Name 434","LastName":"Last Name 434"},{"ID":435,"IDBook":145,"FirstName":"First Name 435","LastName":"Last Name 435"},{"ID":436,"IDBook":146,"FirstName":"First Name 436","LastName":"Last Name 436"},{"ID":437,"IDBook":146,"FirstName":"First Name 437","LastName":"Last Name 437"},{"ID":438,"IDBook":146,"FirstName":"First Name 438","LastName":"Last Name 438"},{"ID":439,"IDBook":147,"FirstName":"First Name 439","LastName":"Last Name 439"},{"ID":440,"IDBook":147,"FirstName":"First Name 440","LastName":"Last Name 440"},{"ID":441,"IDBook":147,"FirstName":"First Name 441","LastName":"Last Name 441"},{"ID":442,"IDBook":148,"FirstName":"First Name 442","LastName":"Last Name 442"},{"ID":443,"IDBook":148,"FirstName":"First Name 443","LastName":"Last Name 443"},{"ID":444,"IDBook":148,"FirstName":"First Name 444","LastName":"Last Name 444"},{"ID":445,"IDBook":149,"FirstName":"First Name 445","LastName":"Last Name 445"},{"ID":446,"IDBook":149,"FirstName":"First Name 446","LastName":"Last Name 446"},{"ID":447,"IDBook":149,"FirstName":"First Name 447","LastName":"Last Name 447"},{"ID":448,"IDBook":150,"FirstName":"First Name 448","LastName":"Last Name 448"},{"ID":449,"IDBook":150,"FirstName":"First Name 449","LastName":"Last Name 449"},{"ID":450,"IDBook":150,"FirstName":"First Name 450","LastName":"Last Name 450"},{"ID":451,"IDBook":151,"FirstName":"First Name 451","LastName":"Last Name 451"},{"ID":452,"IDBook":151,"FirstName":"First Name 452","LastName":"Last Name 452"},{"ID":453,"IDBook":151,"FirstName":"First Name 453","LastName":"Last Name 453"},{"ID":454,"IDBook":152,"FirstName":"First Name 454","LastName":"Last Name 454"},{"ID":455,"IDBook":152,"FirstName":"First Name 455","LastName":"Last Name 455"},{"ID":456,"IDBook":152,"FirstName":"First Name 456","LastName":"Last Name 456"},{"ID":457,"IDBook":153,"FirstName":"First Name 457","LastName":"Last Name 457"},{"ID":458,"IDBook":153,"FirstName":"First Name 458","LastName":"Last Name 458"},{"ID":459,"IDBook":153,"FirstName":"First Name 459","LastName":"Last Name 459"},{"ID":460,"IDBook":154,"FirstName":"First Name 460","LastName":"Last Name 460"},{"ID":461,"IDBook":154,"FirstName":"First Name 461","LastName":"Last Name 461"},{"ID":462,"IDBook":154,"FirstName":"First Name 462","LastName":"Last Name 462"},{"ID":463,"IDBook":155,"FirstName":"First Name 463","LastName":"Last Name 463"},{"ID":464,"IDBook":155,"FirstName":"First Name 464","LastName":"Last Name 464"},{"ID":465,"IDBook":155,"FirstName":"First Name 465","LastName":"Last Name 465"},{"ID":466,"IDBook":156,"FirstName":"First Name 466","LastName":"Last Name 466"},{"ID":467,"IDBook":156,"FirstName":"First Name 467","LastName":"Last Name 467"},{"ID":468,"IDBook":156,"FirstName":"First Name 468","LastName":"Last Name 468"},{"ID":469,"IDBook":157,"FirstName":"First Name 469","LastName":"Last Name 469"},{"ID":470,"IDBook":157,"FirstName":"First Name 470","LastName":"Last Name 470"},{"ID":471,"IDBook":157,"FirstName":"First Name 471","LastName":"Last Name 471"},{"ID":472,"IDBook":158,"FirstName":"First Name 472","LastName":"Last Name 472"},{"ID":473,"IDBook":158,"FirstName":"First Name 473","LastName":"Last Name 473"},{"ID":474,"IDBook":158,"FirstName":"First Name 474","LastName":"Last Name 474"},{"ID":475,"IDBook":159,"FirstName":"First Name 475","LastName":"Last Name 475"},{"ID":476,"IDBook":159,"FirstName":"First Name 476","LastName":"Last Name 476"},{"ID":477,"IDBook":159,"FirstName":"First Name 477","LastName":"Last Name 477"},{"ID":478,"IDBook":160,"FirstName":"First Name 478","LastName":"Last Name 478"},{"ID":479,"IDBook":160,"FirstName":"First Name 479","LastName":"Last Name 479"},{"ID":480,"IDBook":160,"FirstName":"First Name 480","LastName":"Last Name 480"},{"ID":481,"IDBook":161,"FirstName":"First Name 481","LastName":"Last Name 481"},{"ID":482,"IDBook":161,"FirstName":"First Name 482","LastName":"Last Name 482"},{"ID":483,"IDBook":161,"FirstName":"First Name 483","LastName":"Last Name 483"},{"ID":484,"IDBook":162,"FirstName":"First Name 484","LastName":"Last Name 484"},{"ID":485,"IDBook":162,"FirstName":"First Name 485","LastName":"Last Name 485"},{"ID":486,"IDBook":162,"FirstName":"First Name 486","LastName":"Last Name 486"},{"ID":487,"IDBook":163,"FirstName":"First Name 487","LastName":"Last Name 487"},{"ID":488,"IDBook":163,"FirstName":"First Name 488","LastName":"Last Name 488"},{"ID":489,"IDBook":163,"FirstName":"First Name 489","LastName":"Last Name 489"},{"ID":490,"IDBook":164,"FirstName":"First Name 490","LastName":"Last Name 490"},{"ID":491,"IDBook":164,"FirstName":"First Name 491","LastName":"Last Name 491"},{"ID":492,"IDBook":164,"FirstName":"First Name 492","LastName":"Last Name 492"},{"ID":493,"IDBook":165,"FirstName":"First Name 493","LastName":"Last Name 493"},{"ID":494,"IDBook":165,"FirstName":"First Name 494","LastName":"Last Name 494"},{"ID":495,"IDBook":165,"FirstName":"First Name 495","LastName":"Last Name 495"},{"ID":496,"IDBook":166,"FirstName":"First Name 496","LastName":"Last Name 496"},{"ID":497,"IDBook":166,"FirstName":"First Name 497","LastName":"Last Name 497"},{"ID":498,"IDBook":166,"FirstName":"First Name 498","LastName":"Last Name 498"},{"ID":499,"IDBook":167,"FirstName":"First Name 499","LastName":"Last Name 499"},{"ID":500,"IDBook":167,"FirstName":"First Name 500","LastName":"Last Name 500"},{"ID":501,"IDBook":167,"FirstName":"First Name 501","LastName":"Last Name 501"},{"ID":502,"IDBook":168,"FirstName":"First Name 502","LastName":"Last Name 502"},{"ID":503,"IDBook":168,"FirstName":"First Name 503","LastName":"Last Name 503"},{"ID":504,"IDBook":168,"FirstName":"First Name 504","LastName":"Last Name 504"},{"ID":505,"IDBook":169,"FirstName":"First Name 505","LastName":"Last Name 505"},{"ID":506,"IDBook":169,"FirstName":"First Name 506","LastName":"Last Name 506"},{"ID":507,"IDBook":169,"FirstName":"First Name 507","LastName":"Last Name 507"},{"ID":508,"IDBook":170,"FirstName":"First Name 508","LastName":"Last Name 508"},{"ID":509,"IDBook":170,"FirstName":"First Name 509","LastName":"Last Name 509"},{"ID":510,"IDBook":170,"FirstName":"First Name 510","LastName":"Last Name 510"},{"ID":511,"IDBook":171,"FirstName":"First Name 511","LastName":"Last Name 511"},{"ID":512,"IDBook":171,"FirstName":"First Name 512","LastName":"Last Name 512"},{"ID":513,"IDBook":171,"FirstName":"First Name 513","LastName":"Last Name 513"},{"ID":514,"IDBook":172,"FirstName":"First Name 514","LastName":"Last Name 514"},{"ID":515,"IDBook":172,"FirstName":"First Name 515","LastName":"Last Name 515"},{"ID":516,"IDBook":172,"FirstName":"First Name 516","LastName":"Last Name 516"},{"ID":517,"IDBook":173,"FirstName":"First Name 517","LastName":"Last Name 517"},{"ID":518,"IDBook":173,"FirstName":"First Name 518","LastName":"Last Name 518"},{"ID":519,"IDBook":173,"FirstName":"First Name 519","LastName":"Last Name 519"},{"ID":520,"IDBook":174,"FirstName":"First Name 520","LastName":"Last Name 520"},{"ID":521,"IDBook":174,"FirstName":"First Name 521","LastName":"Last Name 521"},{"ID":522,"IDBook":174,"FirstName":"First Name 522","LastName":"Last Name 522"},{"ID":523,"IDBook":175,"FirstName":"First Name 523","LastName":"Last Name 523"},{"ID":524,"IDBook":175,"FirstName":"First Name 524","LastName":"Last Name 524"},{"ID":525,"IDBook":175,"FirstName":"First Name 525","LastName":"Last Name 525"},{"ID":526,"IDBook":176,"FirstName":"First Name 526","LastName":"Last Name 526"},{"ID":527,"IDBook":176,"FirstName":"First Name 527","LastName":"Last Name 527"},{"ID":528,"IDBook":176,"FirstName":"First Name 528","LastName":"Last Name 528"},{"ID":529,"IDBook":177,"FirstName":"First Name 529","LastName":"Last Name 529"},{"ID":530,"IDBook":177,"FirstName":"First Name 530","LastName":"Last Name 530"},{"ID":531,"IDBook":177,"FirstName":"First Name 531","LastName":"Last Name 531"},{"ID":532,"IDBook":178,"FirstName":"First Name 532","LastName":"Last Name 532"},{"ID":533,"IDBook":178,"FirstName":"First Name 533","LastName":"Last Name 533"},{"ID":534,"IDBook":178,"FirstName":"First Name 534","LastName":"Last Name 534"},{"ID":535,"IDBook":179,"FirstName":"First Name 535","LastName":"Last Name 535"},{"ID":536,"IDBook":179,"FirstName":"First Name 536","LastName":"Last Name 536"},{"ID":537,"IDBook":179,"FirstName":"First Name 537","LastName":"Last Name 537"},{"ID":538,"IDBook":180,"FirstName":"First Name 538","LastName":"Last Name 538"},{"ID":539,"IDBook":180,"FirstName":"First Name 539","LastName":"Last Name 539"},{"ID":540,"IDBook":180,"FirstName":"First Name 540","LastName":"Last Name 540"},{"ID":541,"IDBook":181,"FirstName":"First Name 541","LastName":"Last Name 541"},{"ID":542,"IDBook":181,"FirstName":"First Name 542","LastName":"Last Name 542"},{"ID":543,"IDBook":181,"FirstName":"First Name 543","LastName":"Last Name 543"},{"ID":544,"IDBook":182,"FirstName":"First Name 544","LastName":"Last Name 544"},{"ID":545,"IDBook":182,"FirstName":"First Name 545","LastName":"Last Name 545"},{"ID":546,"IDBook":182,"FirstName":"First Name 546","LastName":"Last Name 546"},{"ID":547,"IDBook":183,"FirstName":"First Name 547","LastName":"Last Name 547"},{"ID":548,"IDBook":183,"FirstName":"First Name 548","LastName":"Last Name 548"},{"ID":549,"IDBook":183,"FirstName":"First Name 549","LastName":"Last Name 549"},{"ID":550,"IDBook":184,"FirstName":"First Name 550","LastName":"Last Name 550"},{"ID":551,"IDBook":184,"FirstName":"First Name 551","LastName":"Last Name 551"},{"ID":552,"IDBook":184,"FirstName":"First Name 552","LastName":"Last Name 552"},{"ID":553,"IDBook":185,"FirstName":"First Name 553","LastName":"Last Name 553"},{"ID":554,"IDBook":185,"FirstName":"First Name 554","LastName":"Last Name 554"},{"ID":555,"IDBook":185,"FirstName":"First Name 555","LastName":"Last Name 555"},{"ID":556,"IDBook":186,"FirstName":"First Name 556","LastName":"Last Name 556"},{"ID":557,"IDBook":186,"FirstName":"First Name 557","LastName":"Last Name 557"},{"ID":558,"IDBook":186,"FirstName":"First Name 558","LastName":"Last Name 558"},{"ID":559,"IDBook":187,"FirstName":"First Name 559","LastName":"Last Name 559"},{"ID":560,"IDBook":187,"FirstName":"First Name 560","LastName":"Last Name 560"},{"ID":561,"IDBook":187,"FirstName":"First Name 561","LastName":"Last Name 561"},{"ID":562,"IDBook":188,"FirstName":"First Name 562","LastName":"Last Name 562"},{"ID":563,"IDBook":188,"FirstName":"First Name 563","LastName":"Last Name 563"},{"ID":564,"IDBook":188,"FirstName":"First Name 564","LastName":"Last Name 564"},{"ID":565,"IDBook":189,"FirstName":"First Name 565","LastName":"Last Name 565"},{"ID":566,"IDBook":189,"FirstName":"First Name 566","LastName":"Last Name 566"},{"ID":567,"IDBook":189,"FirstName":"First Name 567","LastName":"Last Name 567"},{"ID":568,"IDBook":190,"FirstName":"First Name 568","LastName":"Last Name 568"},{"ID":569,"IDBook":190,"FirstName":"First Name 569","LastName":"Last Name 569"},{"ID":570,"IDBook":190,"FirstName":"First Name 570","LastName":"Last Name 570"},{"ID":571,"IDBook":191,"FirstName":"First Name 571","LastName":"Last Name 571"},{"ID":572,"IDBook":191,"FirstName":"First Name 572","LastName":"Last Name 572"},{"ID":573,"IDBook":191,"FirstName":"First Name 573","LastName":"Last Name 573"},{"ID":574,"IDBook":192,"FirstName":"First Name 574","LastName":"Last Name 574"},{"ID":575,"IDBook":192,"FirstName":"First Name 575","LastName":"Last Name 575"},{"ID":576,"IDBook":192,"FirstName":"First Name 576","LastName":"Last Name 576"},{"ID":577,"IDBook":193,"FirstName":"First Name 577","LastName":"Last Name 577"},{"ID":578,"IDBook":193,"FirstName":"First Name 578","LastName":"Last Name 578"},{"ID":579,"IDBook":193,"FirstName":"First Name 579","LastName":"Last Name 579"},{"ID":580,"IDBook":194,"FirstName":"First Name 580","LastName":"Last Name 580"},{"ID":581,"IDBook":194,"FirstName":"First Name 581","LastName":"Last Name 581"},{"ID":582,"IDBook":194,"FirstName":"First Name 582","LastName":"Last Name 582"},{"ID":583,"IDBook":195,"FirstName":"First Name 583","LastName":"Last Name 583"},{"ID":584,"IDBook":195,"FirstName":"First Name 584","LastName":"Last Name 584"},{"ID":585,"IDBook":195,"FirstName":"First Name 585","LastName":"Last Name 585"},{"ID":586,"IDBook":196,"FirstName":"First Name 586","LastName":"Last Name 586"},{"ID":587,"IDBook":196,"FirstName":"First Name 587","LastName":"Last Name 587"},{"ID":588,"IDBook":196,"FirstName":"First Name 588","LastName":"Last Name 588"},{"ID":589,"IDBook":197,"FirstName":"First Name 589","LastName":"Last Name 589"},{"ID":590,"IDBook":197,"FirstName":"First Name 590","LastName":"Last Name 590"},{"ID":591,"IDBook":197,"FirstName":"First Name 591","LastName":"Last Name 591"},{"ID":592,"IDBook":198,"FirstName":"First Name 592","LastName":"Last Name 592"},{"ID":593,"IDBook":198,"FirstName":"First Name 593","LastName":"Last Name 593"},{"ID":594,"IDBook":198,"FirstName":"First Name 594","LastName":"Last Name 594"},{"ID":595,"IDBook":199,"FirstName":"First Name 595","LastName":"Last Name 595"},{"ID":596,"IDBook":199,"FirstName":"First Name 596","LastName":"Last Name 596"},{"ID":597,"IDBook":199,"FirstName":"First Name 597","LastName":"Last Name 597"},{"ID":598,"IDBook":200,"FirstName":"First Name 598","LastName":"Last Name 598"},{"ID":599,"IDBook":200,"FirstName":"First Name 599","LastName":"Last Name 599"},{"ID":600,"IDBook":200,"FirstName":"First Name 600","LastName":"Last Name 600"}]</msg>
+<status status="PASS" starttime="20200112 21:31:42.654" endtime="20200112 21:31:42.657"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:42.658" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200112 21:31:42.657" endtime="20200112 21:31:42.658"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.426" endtime="20200112 21:31:42.658"></status>
+</kw>
+<kw name="When the status code is checked" library="ResourceAuthors">
+<arguments>
+<arg>200</arg>
+</arguments>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${RESPONSE.status_code}</arg>
+<arg>${STATUSCODE_REQUEST}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:42.661" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200112 21:31:42.660" endtime="20200112 21:31:42.661"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.659" endtime="20200112 21:31:42.661"></status>
+</kw>
+<kw name="And check if the reason is" library="ResourceAuthors">
+<arguments>
+<arg>OK</arg>
+</arguments>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${RESPONSE.reason}</arg>
+<arg>${REASON_SOLICITADO}</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:42.663" endtime="20200112 21:31:42.664"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.662" endtime="20200112 21:31:42.664"></status>
+</kw>
+<kw name="Then the request returns a list of all available authors" library="ResourceAuthors">
+<kw name="Get Length" library="BuiltIn">
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+</arguments>
+<assign>
+<var>${AMOUNT_OF_AUTHORS}</var>
+</assign>
+<msg timestamp="20200112 21:31:42.668" level="INFO">Length is 600</msg>
+<msg timestamp="20200112 21:31:42.668" level="INFO">${AMOUNT_OF_AUTHORS} = 600</msg>
+<status status="PASS" starttime="20200112 21:31:42.665" endtime="20200112 21:31:42.669"></status>
+</kw>
+<kw name="List Should Not Contain Duplicates" library="Collections">
+<doc>Fails if any element in the ``list`` is found from it more than once.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:42.669" endtime="20200112 21:31:42.707"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${AMOUNT_OF_AUTHORS} author records returned, no records repeated</arg>
+</arguments>
+<msg timestamp="20200112 21:31:42.709" level="INFO">600 author records returned, no records repeated</msg>
+<status status="PASS" starttime="20200112 21:31:42.708" endtime="20200112 21:31:42.709"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.664" endtime="20200112 21:31:42.709"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.425" endtime="20200112 21:31:42.710" critical="yes"></status>
+</test>
+<test id="s1-t3" name="Scenario 3: Requirement to Register a New Author (POST)">
+<kw name="Given I do a requirement to register a new author" library="ResourceAuthors">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>content-type=application/json</arg>
+</arguments>
+<assign>
+<var>${HEADERS}</var>
+</assign>
+<msg timestamp="20200112 21:31:42.714" level="INFO">${HEADERS} = {'content-type': 'application/json'}</msg>
+<status status="PASS" starttime="20200112 21:31:42.713" endtime="20200112 21:31:42.714"></status>
+</kw>
+<kw name="Post Request" library="ExtendedRequestsLibrary">
+<doc>Send a POST request on the session object found in the cache using the given ``label``.</doc>
+<arguments>
+<arg>apiTeste</arg>
+<arg>api/Authors</arg>
+<arg>data={"ID": 900,"IDBook": 901,"FirstName": "ANA","LastName": "CAROLINA"}</arg>
+<arg>headers=${HEADERS}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200112 21:31:42.945" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200112 21:31:42.715" endtime="20200112 21:31:42.945"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.text}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:42.946" level="INFO">{"ID":900,"IDBook":901,"FirstName":"ANA","LastName":"CAROLINA"}</msg>
+<status status="PASS" starttime="20200112 21:31:42.946" endtime="20200112 21:31:42.946"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:42.947" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200112 21:31:42.947" endtime="20200112 21:31:42.947"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.712" endtime="20200112 21:31:42.947"></status>
+</kw>
+<kw name="When the status code is checked" library="ResourceAuthors">
+<arguments>
+<arg>200</arg>
+</arguments>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${RESPONSE.status_code}</arg>
+<arg>${STATUSCODE_REQUEST}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:42.949" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200112 21:31:42.949" endtime="20200112 21:31:42.950"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.948" endtime="20200112 21:31:42.950"></status>
+</kw>
+<kw name="And check if the reason is" library="ResourceAuthors">
+<arguments>
+<arg>OK</arg>
+</arguments>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${RESPONSE.reason}</arg>
+<arg>${REASON_SOLICITADO}</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:42.951" endtime="20200112 21:31:42.952"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.950" endtime="20200112 21:31:42.952"></status>
+</kw>
+<kw name="Then check if the author was registered with the data correctly" library="ResourceAuthors">
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>ID</arg>
+<arg>900</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:42.954" endtime="20200112 21:31:42.955"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>IDBook</arg>
+<arg>901</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:42.955" endtime="20200112 21:31:42.956"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>FirstName</arg>
+<arg>ANA</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:42.956" endtime="20200112 21:31:42.957"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>LastName</arg>
+<arg>CAROLINA</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:42.957" endtime="20200112 21:31:42.958"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.953" endtime="20200112 21:31:42.959"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.711" endtime="20200112 21:31:42.959" critical="yes"></status>
+</test>
+<test id="s1-t4" name="Scenario 4:Requirement to delete a specific author's resume (DELETE)">
+<kw name="Given I request the deletion of the author &quot;20&quot;" library="ResourceAuthors">
+<kw name="Delete Request" library="ExtendedRequestsLibrary">
+<doc>Send a DELETE request on the session object found in the cache using the given
+``label``.</doc>
+<arguments>
+<arg>apiTeste</arg>
+<arg>api/Authors/${ENDPOINT_ID}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200112 21:31:43.191" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200112 21:31:42.962" endtime="20200112 21:31:43.191"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.text}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:43.192" level="INFO"></msg>
+<status status="PASS" starttime="20200112 21:31:43.191" endtime="20200112 21:31:43.192"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:43.193" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200112 21:31:43.193" endtime="20200112 21:31:43.194"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.961" endtime="20200112 21:31:43.194"></status>
+</kw>
+<kw name="When the status code is checked" library="ResourceAuthors">
+<arguments>
+<arg>200</arg>
+</arguments>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${RESPONSE.status_code}</arg>
+<arg>${STATUSCODE_REQUEST}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:43.196" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200112 21:31:43.195" endtime="20200112 21:31:43.196"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:43.194" endtime="20200112 21:31:43.196"></status>
+</kw>
+<kw name="And check if the reason is" library="ResourceAuthors">
+<arguments>
+<arg>OK</arg>
+</arguments>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${RESPONSE.reason}</arg>
+<arg>${REASON_SOLICITADO}</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:43.198" endtime="20200112 21:31:43.199"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:43.197" endtime="20200112 21:31:43.199"></status>
+</kw>
+<kw name="Then check if the respose body returned empty" library="ResourceAuthors">
+<kw name="Should Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is empty.</doc>
+<arguments>
+<arg>${RESPONSE.content}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:43.201" level="INFO">Length is 0</msg>
+<status status="PASS" starttime="20200112 21:31:43.200" endtime="20200112 21:31:43.201"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:43.199" endtime="20200112 21:31:43.201"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:42.960" endtime="20200112 21:31:43.201" critical="yes"></status>
+</test>
+<test id="s1-t5" name="Scenario 5: Request a specific author (GET(ID))">
+<kw name="Given that I make a request to return the author data &quot;100&quot;" library="ResourceAuthors">
+<kw name="Get Request" library="ExtendedRequestsLibrary">
+<doc>Send a GET request on the session object found in the cache using the given ``label``.</doc>
+<arguments>
+<arg>apiTeste</arg>
+<arg>api/Authors/${ENDPOINT_ID}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200112 21:31:43.425" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200112 21:31:43.204" endtime="20200112 21:31:43.425"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.text}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:43.425" level="INFO">{"ID":100,"IDBook":50,"FirstName":"First Name 100","LastName":"Last Name 100"}</msg>
+<status status="PASS" starttime="20200112 21:31:43.425" endtime="20200112 21:31:43.426"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:43.426" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200112 21:31:43.426" endtime="20200112 21:31:43.426"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:43.203" endtime="20200112 21:31:43.426"></status>
+</kw>
+<kw name="When the status code is checked" library="ResourceAuthors">
+<arguments>
+<arg>200</arg>
+</arguments>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${RESPONSE.status_code}</arg>
+<arg>${STATUSCODE_REQUEST}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:43.428" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200112 21:31:43.428" endtime="20200112 21:31:43.429"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:43.427" endtime="20200112 21:31:43.429"></status>
+</kw>
+<kw name="And check if the reason is" library="ResourceAuthors">
+<arguments>
+<arg>OK</arg>
+</arguments>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${RESPONSE.reason}</arg>
+<arg>${REASON_SOLICITADO}</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:43.430" endtime="20200112 21:31:43.431"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:43.429" endtime="20200112 21:31:43.431"></status>
+</kw>
+<kw name="Then check if the request returned the data correctly from the author" library="ResourceAuthors">
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${RESPONSE.json()['IDBook']}</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:43.432" endtime="20200112 21:31:43.433"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>ID</arg>
+<arg>100</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:43.434" endtime="20200112 21:31:43.435"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>IDBook</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:43.435" endtime="20200112 21:31:43.436"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>FirstName</arg>
+<arg>First Name 100</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:43.436" endtime="20200112 21:31:43.437"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>LastName</arg>
+<arg>Last Name 100</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:43.437" endtime="20200112 21:31:43.438"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:43.432" endtime="20200112 21:31:43.438"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:43.202" endtime="20200112 21:31:43.439" critical="yes"></status>
+</test>
+<test id="s1-t6" name="Scenario 6: Requirement to update or modify specific author data (PUT)">
+<kw name="Given I do request change in author &quot;100&quot;" library="ResourceAuthors">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>content-type=application/json</arg>
+</arguments>
+<assign>
+<var>${HEADERS}</var>
+</assign>
+<msg timestamp="20200112 21:31:43.442" level="INFO">${HEADERS} = {'content-type': 'application/json'}</msg>
+<status status="PASS" starttime="20200112 21:31:43.441" endtime="20200112 21:31:43.442"></status>
+</kw>
+<kw name="Post Request" library="ExtendedRequestsLibrary">
+<doc>Send a POST request on the session object found in the cache using the given ``label``.</doc>
+<arguments>
+<arg>apiTeste</arg>
+<arg>api/Authors/${ENDPOINT_PUT}</arg>
+<arg>data={"ID": 204,"IDBook": 204,"FirstName": "ANA","LastName": "CAROLINA"}</arg>
+<arg>headers=${HEADERS}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200112 21:31:43.665" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200112 21:31:43.443" endtime="20200112 21:31:43.665"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${RESPONSE.text}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:43.666" level="INFO">{"ID":204,"IDBook":204,"FirstName":"ANA","LastName":"CAROLINA"}</msg>
+<status status="PASS" starttime="20200112 21:31:43.665" endtime="20200112 21:31:43.666"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:43.667" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200112 21:31:43.666" endtime="20200112 21:31:43.667"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:43.441" endtime="20200112 21:31:43.667"></status>
+</kw>
+<kw name="When the status code is checked" library="ResourceAuthors">
+<arguments>
+<arg>200</arg>
+</arguments>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${RESPONSE.status_code}</arg>
+<arg>${STATUSCODE_REQUEST}</arg>
+</arguments>
+<msg timestamp="20200112 21:31:43.669" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200112 21:31:43.668" endtime="20200112 21:31:43.669"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:43.667" endtime="20200112 21:31:43.670"></status>
+</kw>
+<kw name="And check if the reason is" library="ResourceAuthors">
+<arguments>
+<arg>OK</arg>
+</arguments>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${RESPONSE.reason}</arg>
+<arg>${REASON_SOLICITADO}</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:43.671" endtime="20200112 21:31:43.672"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:43.670" endtime="20200112 21:31:43.672"></status>
+</kw>
+<kw name="Then I check if the author record has been modified correctly" library="ResourceAuthors">
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>ID</arg>
+<arg>204</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:43.673" endtime="20200112 21:31:43.674"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>IDBook</arg>
+<arg>204</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:43.674" endtime="20200112 21:31:43.675"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>FirstName</arg>
+<arg>ANA</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:43.676" endtime="20200112 21:31:43.676"></status>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>LastName</arg>
+<arg>CAROLINA</arg>
+</arguments>
+<status status="PASS" starttime="20200112 21:31:43.677" endtime="20200112 21:31:43.678"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:43.672" endtime="20200112 21:31:43.678"></status>
+</kw>
+<status status="PASS" starttime="20200112 21:31:43.439" endtime="20200112 21:31:43.678" critical="yes"></status>
+</test>
+<doc>Documentacao da API: Authors</doc>
+<status status="PASS" starttime="20200112 21:31:41.116" endtime="20200112 21:31:43.680"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="6" fail="0">Critical Tests</stat>
+<stat pass="6" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="6" fail="0" id="s1" name="APIAuthors">APIAuthors</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
